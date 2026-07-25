@@ -21,6 +21,7 @@ struct Word: Identifiable {
     let translation: String
     let partOfSpeech: String
     let gender: String?             // for nouns: "masculine"/"feminine"/"neuter"
+    let stressIndex: Int            // 0-based index of the stressed letter in `russian`
     let exampleRussian: String
     let exampleTranslation: String
     let verbDetails: VerbDetails?   // only filled in for verbs
@@ -31,101 +32,121 @@ let wordList: [Word] = [
 
     Word(id: 1, russian: "я", transliteration: "ya", translation: "I",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 0,
          exampleRussian: "Я студент.", exampleTranslation: "I am a student.",
          verbDetails: nil),
 
     Word(id: 2, russian: "ты", transliteration: "ty", translation: "you (informal)",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Ты дома?", exampleTranslation: "Are you home?",
          verbDetails: nil),
 
     Word(id: 3, russian: "он", transliteration: "on", translation: "he",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 0,
          exampleRussian: "Он врач.", exampleTranslation: "He is a doctor.",
          verbDetails: nil),
 
     Word(id: 4, russian: "она", transliteration: "aná", translation: "she",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Она здесь.", exampleTranslation: "She is here.",
          verbDetails: nil),
 
     Word(id: 5, russian: "мы", transliteration: "my", translation: "we",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Мы друзья.", exampleTranslation: "We are friends.",
          verbDetails: nil),
 
     Word(id: 6, russian: "вы", transliteration: "vy", translation: "you (formal/plural)",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Вы говорите по-русски?", exampleTranslation: "Do you speak Russian?",
          verbDetails: nil),
 
     Word(id: 7, russian: "они", transliteration: "aní", translation: "they",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Они дома.", exampleTranslation: "They are home.",
          verbDetails: nil),
 
     Word(id: 8, russian: "это", transliteration: "Eta", translation: "this / it",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 0,
          exampleRussian: "Это моя книга.", exampleTranslation: "This is my book.",
          verbDetails: nil),
 
     Word(id: 9, russian: "что", transliteration: "shto", translation: "what",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Что это?", exampleTranslation: "What is this?",
          verbDetails: nil),
 
     Word(id: 10, russian: "как", transliteration: "kak", translation: "how",
          partOfSpeech: "adverb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Как дела?", exampleTranslation: "How are you?",
          verbDetails: nil),
 
     Word(id: 11, russian: "да", transliteration: "da", translation: "yes",
          partOfSpeech: "particle", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Да, конечно.", exampleTranslation: "Yes, of course.",
          verbDetails: nil),
 
     Word(id: 12, russian: "нет", transliteration: "nyet", translation: "no",
          partOfSpeech: "particle", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Нет, спасибо.", exampleTranslation: "No, thank you.",
          verbDetails: nil),
 
     Word(id: 13, russian: "хорошо", transliteration: "kharashO", translation: "good / well",
          partOfSpeech: "adverb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Всё хорошо.", exampleTranslation: "Everything is fine.",
          verbDetails: nil),
 
     Word(id: 14, russian: "спасибо", transliteration: "spasIba", translation: "thank you",
          partOfSpeech: "interjection", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Спасибо за помощь!", exampleTranslation: "Thanks for the help!",
          verbDetails: nil),
 
     Word(id: 15, russian: "пожалуйста", transliteration: "pazhAlusta", translation: "please / you're welcome",
          partOfSpeech: "interjection", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Помоги мне, пожалуйста.", exampleTranslation: "Help me, please.",
          verbDetails: nil),
 
     Word(id: 16, russian: "дом", transliteration: "dom", translation: "house / home",
          partOfSpeech: "noun", gender: "masculine",
+         stressIndex: 1,
          exampleRussian: "Это мой дом.", exampleTranslation: "This is my house.",
          verbDetails: nil),
 
     Word(id: 17, russian: "вода", transliteration: "vadA", translation: "water",
          partOfSpeech: "noun", gender: "feminine",
+         stressIndex: 3,
          exampleRussian: "Я хочу воды.", exampleTranslation: "I want water.",
          verbDetails: nil),
 
     Word(id: 18, russian: "время", transliteration: "vRYEmya", translation: "time",
          partOfSpeech: "noun", gender: "neuter",
+         stressIndex: 2,
          exampleRussian: "У меня нет времени.", exampleTranslation: "I don't have time.",
          verbDetails: nil),
 
     Word(id: 19, russian: "год", transliteration: "got", translation: "year",
          partOfSpeech: "noun", gender: "masculine",
+         stressIndex: 1,
          exampleRussian: "В этом году.", exampleTranslation: "This year.",
          verbDetails: nil),
 
     Word(id: 20, russian: "человек", transliteration: "chelavYEk", translation: "person",
          partOfSpeech: "noun", gender: "masculine",
+         stressIndex: 5,
          exampleRussian: "Он хороший человек.", exampleTranslation: "He is a good person.",
          verbDetails: nil),
 
@@ -133,6 +154,7 @@ let wordList: [Word] = [
 
     Word(id: 21, russian: "быть", transliteration: "byt", translation: "to be",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я буду дома.", exampleTranslation: "I will be home.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: nil,
@@ -142,6 +164,7 @@ let wordList: [Word] = [
 
     Word(id: 22, russian: "знать", transliteration: "znat", translation: "to know",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я не знаю.", exampleTranslation: "I don't know.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "узнать",
@@ -151,6 +174,7 @@ let wordList: [Word] = [
 
     Word(id: 23, russian: "мочь", transliteration: "moch", translation: "can / to be able to",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я могу помочь.", exampleTranslation: "I can help.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "смочь",
@@ -160,6 +184,7 @@ let wordList: [Word] = [
 
     Word(id: 24, russian: "хотеть", transliteration: "khatYEt", translation: "to want",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я хочу есть.", exampleTranslation: "I want to eat.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "захотеть",
@@ -169,6 +194,7 @@ let wordList: [Word] = [
 
     Word(id: 25, russian: "говорить", transliteration: "gavarIt", translation: "to speak / say",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я говорю по-русски.", exampleTranslation: "I speak Russian.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "сказать",
@@ -178,6 +204,7 @@ let wordList: [Word] = [
 
     Word(id: 26, russian: "делать", transliteration: "dYElat", translation: "to do / make",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Что ты делаешь?", exampleTranslation: "What are you doing?",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "сделать",
@@ -187,6 +214,7 @@ let wordList: [Word] = [
 
     Word(id: 27, russian: "идти", transliteration: "itI", translation: "to go (on foot)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я иду домой.", exampleTranslation: "I am going home.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "пойти",
@@ -196,16 +224,19 @@ let wordList: [Word] = [
 
     Word(id: 28, russian: "свой", transliteration: "svoy", translation: "one's own",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 2,
          exampleRussian: "У меня есть своя комната.", exampleTranslation: "I have my own room.",
          verbDetails: nil),
 
     Word(id: 29, russian: "весь", transliteration: "vyes", translation: "all / whole",
          partOfSpeech: "pronoun", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Весь день.", exampleTranslation: "The whole day.",
          verbDetails: nil),
 
     Word(id: 30, russian: "так", transliteration: "tak", translation: "so / like this",
          partOfSpeech: "adverb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Это не так.", exampleTranslation: "That's not so.",
          verbDetails: nil),
 
@@ -213,6 +244,7 @@ let wordList: [Word] = [
 
     Word(id: 31, russian: "видеть", transliteration: "vIdet", translation: "to see",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я вижу тебя.", exampleTranslation: "I see you.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "увидеть",
@@ -222,6 +254,7 @@ let wordList: [Word] = [
 
     Word(id: 32, russian: "смотреть", transliteration: "smatRYEt", translation: "to watch / look",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я смотрю телевизор.", exampleTranslation: "I am watching TV.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "посмотреть",
@@ -231,6 +264,7 @@ let wordList: [Word] = [
 
     Word(id: 33, russian: "думать", transliteration: "dUmat", translation: "to think",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я думаю, что да.", exampleTranslation: "I think so.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "подумать",
@@ -240,6 +274,7 @@ let wordList: [Word] = [
 
     Word(id: 34, russian: "писать", transliteration: "pisAt", translation: "to write",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я пишу письмо.", exampleTranslation: "I am writing a letter.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "написать",
@@ -249,6 +284,7 @@ let wordList: [Word] = [
 
     Word(id: 35, russian: "читать", transliteration: "chitAt", translation: "to read",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я читаю книгу.", exampleTranslation: "I am reading a book.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "прочитать",
@@ -258,6 +294,7 @@ let wordList: [Word] = [
 
     Word(id: 36, russian: "давать", transliteration: "davAt", translation: "to give",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Он даёт мне книгу.", exampleTranslation: "He gives me a book.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "дать",
@@ -267,6 +304,7 @@ let wordList: [Word] = [
 
     Word(id: 37, russian: "понимать", transliteration: "panimAt", translation: "to understand",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я не понимаю.", exampleTranslation: "I don't understand.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "понять",
@@ -276,6 +314,7 @@ let wordList: [Word] = [
 
     Word(id: 38, russian: "жить", transliteration: "zhyt", translation: "to live",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я живу в Москве.", exampleTranslation: "I live in Moscow.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: nil,
@@ -285,6 +324,7 @@ let wordList: [Word] = [
 
     Word(id: 39, russian: "работать", transliteration: "rabOtat", translation: "to work",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я работаю дома.", exampleTranslation: "I work from home.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: nil,
@@ -294,6 +334,7 @@ let wordList: [Word] = [
 
     Word(id: 40, russian: "любить", transliteration: "lyubIt", translation: "to love / like",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я люблю тебя.", exampleTranslation: "I love you.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: nil,
@@ -303,6 +344,7 @@ let wordList: [Word] = [
 
     Word(id: 41, russian: "брать", transliteration: "brAt", translation: "to take",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я беру такси.", exampleTranslation: "I'm taking a taxi.",
          verbDetails: VerbDetails(
             aspect: "imperfective", aspectPair: "взять",
@@ -312,6 +354,7 @@ let wordList: [Word] = [
 
     Word(id: 42, russian: "стать", transliteration: "stAt", translation: "to become",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Он стал врачом.", exampleTranslation: "He became a doctor.",
          verbDetails: VerbDetails(
             aspect: "perfective", aspectPair: "становиться",
@@ -321,6 +364,7 @@ let wordList: [Word] = [
 
     Word(id: 43, russian: "прийти", transliteration: "priytI", translation: "to come / arrive",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Он придёт завтра.", exampleTranslation: "He will come tomorrow.",
          verbDetails: VerbDetails(
             aspect: "perfective", aspectPair: "приходить",
@@ -330,6 +374,7 @@ let wordList: [Word] = [
 
     Word(id: 44, russian: "сказать", transliteration: "skazAt", translation: "to say (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Он сказал правду.", exampleTranslation: "He told the truth.",
          verbDetails: VerbDetails(
             aspect: "perfective", aspectPair: "говорить",
@@ -341,6 +386,7 @@ let wordList: [Word] = [
 
     Word(id: 45, russian: "слышать", transliteration: "slYshat", translation: "to hear",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я тебя не слышу.", exampleTranslation: "I can't hear you.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "услышать",
             pastMasculine: "слышал", pastFeminine: "слышала", pastNeuter: "слышало", pastPlural: "слышали",
@@ -349,6 +395,7 @@ let wordList: [Word] = [
 
     Word(id: 46, russian: "спрашивать", transliteration: "sprAshivat", translation: "to ask",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я хочу спрашивать вас.", exampleTranslation: "I want to ask you.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "спросить",
             pastMasculine: "спрашивал", pastFeminine: "спрашивала", pastNeuter: "спрашивало", pastPlural: "спрашивали",
@@ -357,6 +404,7 @@ let wordList: [Word] = [
 
     Word(id: 47, russian: "спросить", transliteration: "sprasIt", translation: "to ask (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Можно спросить?", exampleTranslation: "May I ask?",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "спрашивать",
             pastMasculine: "спросил", pastFeminine: "спросила", pastNeuter: "спросило", pastPlural: "спросили",
@@ -365,6 +413,7 @@ let wordList: [Word] = [
 
     Word(id: 48, russian: "отвечать", transliteration: "atvechAt", translation: "to answer",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я отвечаю на вопрос.", exampleTranslation: "I'm answering the question.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "ответить",
             pastMasculine: "отвечал", pastFeminine: "отвечала", pastNeuter: "отвечало", pastPlural: "отвечали",
@@ -373,6 +422,7 @@ let wordList: [Word] = [
 
     Word(id: 49, russian: "ответить", transliteration: "atVYEtit", translation: "to answer (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Он не ответил.", exampleTranslation: "He didn't answer.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "отвечать",
             pastMasculine: "ответил", pastFeminine: "ответила", pastNeuter: "ответило", pastPlural: "ответили",
@@ -381,6 +431,7 @@ let wordList: [Word] = [
 
     Word(id: 50, russian: "начинать", transliteration: "nachinAt", translation: "to begin",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Мы начинаем урок.", exampleTranslation: "We are starting the lesson.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "начать",
             pastMasculine: "начинал", pastFeminine: "начинала", pastNeuter: "начинало", pastPlural: "начинали",
@@ -389,6 +440,7 @@ let wordList: [Word] = [
 
     Word(id: 51, russian: "начать", transliteration: "nachAt", translation: "to begin (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Давай начнём.", exampleTranslation: "Let's begin.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "начинать",
             pastMasculine: "начал", pastFeminine: "начала", pastNeuter: "начало", pastPlural: "начали",
@@ -397,6 +449,7 @@ let wordList: [Word] = [
 
     Word(id: 52, russian: "заканчивать", transliteration: "zakAnchivat", translation: "to finish",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я заканчиваю работу.", exampleTranslation: "I'm finishing work.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "закончить",
             pastMasculine: "заканчивал", pastFeminine: "заканчивала", pastNeuter: "заканчивало", pastPlural: "заканчивали",
@@ -405,14 +458,16 @@ let wordList: [Word] = [
 
     Word(id: 53, russian: "закончить", transliteration: "zakOnchit", translation: "to finish (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я закончил работу.", exampleTranslation: "I finished work.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "заканчивать",
             pastMasculine: "закончил", pastFeminine: "закончила", pastNeuter: "закончило", pastPlural: "закончили",
             present: ["ya": "закончу", "ty": "закончишь", "on": "закончит", "my": "закончим", "vy": "закончите", "oni": "закончат"],
             imperativeInformal: "закончи", imperativeFormal: "закончите")),
 
-    Word(id: 54, russian: "продолжать", transliteration: "praдalzhAt", translation: "to continue",
+    Word(id: 54, russian: "продолжать", transliteration: "pradalzhAt", translation: "to continue",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 7,
          exampleRussian: "Продолжай, пожалуйста.", exampleTranslation: "Please continue.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "продолжить",
             pastMasculine: "продолжал", pastFeminine: "продолжала", pastNeuter: "продолжало", pastPlural: "продолжали",
@@ -421,6 +476,7 @@ let wordList: [Word] = [
 
     Word(id: 55, russian: "помогать", transliteration: "pamagAt", translation: "to help",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я помогаю маме.", exampleTranslation: "I help my mom.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "помочь",
             pastMasculine: "помогал", pastFeminine: "помогала", pastNeuter: "помогало", pastPlural: "помогали",
@@ -429,6 +485,7 @@ let wordList: [Word] = [
 
     Word(id: 56, russian: "помочь", transliteration: "pamOch", translation: "to help (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Помоги мне, пожалуйста.", exampleTranslation: "Help me, please.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "помогать",
             pastMasculine: "помог", pastFeminine: "помогла", pastNeuter: "помогло", pastPlural: "помогли",
@@ -437,6 +494,7 @@ let wordList: [Word] = [
 
     Word(id: 57, russian: "слушать", transliteration: "slUshat", translation: "to listen",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я слушаю музыку.", exampleTranslation: "I'm listening to music.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "послушать",
             pastMasculine: "слушал", pastFeminine: "слушала", pastNeuter: "слушало", pastPlural: "слушали",
@@ -445,6 +503,7 @@ let wordList: [Word] = [
 
     Word(id: 58, russian: "играть", transliteration: "igrAt", translation: "to play",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Дети играют во дворе.", exampleTranslation: "The kids are playing outside.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "сыграть",
             pastMasculine: "играл", pastFeminine: "играла", pastNeuter: "играло", pastPlural: "играли",
@@ -453,6 +512,7 @@ let wordList: [Word] = [
 
     Word(id: 59, russian: "учить", transliteration: "uchIt", translation: "to teach / learn (memorize)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я учу новые слова.", exampleTranslation: "I'm learning new words.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "выучить",
             pastMasculine: "учил", pastFeminine: "учила", pastNeuter: "учило", pastPlural: "учили",
@@ -461,6 +521,7 @@ let wordList: [Word] = [
 
     Word(id: 60, russian: "учиться", transliteration: "uchItsa", translation: "to study / be a student",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я учусь в университете.", exampleTranslation: "I study at university.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "научиться",
             pastMasculine: "учился", pastFeminine: "училась", pastNeuter: "училось", pastPlural: "учились",
@@ -469,6 +530,7 @@ let wordList: [Word] = [
 
     Word(id: 61, russian: "изучать", transliteration: "izuchAt", translation: "to study (a subject)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я изучаю русский язык.", exampleTranslation: "I am studying Russian.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "изучить",
             pastMasculine: "изучал", pastFeminine: "изучала", pastNeuter: "изучало", pastPlural: "изучали",
@@ -477,6 +539,7 @@ let wordList: [Word] = [
 
     Word(id: 62, russian: "покупать", transliteration: "pakupAt", translation: "to buy",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я покупаю хлеб.", exampleTranslation: "I'm buying bread.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "купить",
             pastMasculine: "покупал", pastFeminine: "покупала", pastNeuter: "покупало", pastPlural: "покупали",
@@ -485,6 +548,7 @@ let wordList: [Word] = [
 
     Word(id: 63, russian: "купить", transliteration: "kupIt", translation: "to buy (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я купил новую машину.", exampleTranslation: "I bought a new car.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "покупать",
             pastMasculine: "купил", pastFeminine: "купила", pastNeuter: "купило", pastPlural: "купили",
@@ -493,6 +557,7 @@ let wordList: [Word] = [
 
     Word(id: 64, russian: "продавать", transliteration: "pradavAt", translation: "to sell",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Они продают дом.", exampleTranslation: "They are selling the house.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "продать",
             pastMasculine: "продавал", pastFeminine: "продавала", pastNeuter: "продавало", pastPlural: "продавали",
@@ -501,6 +566,7 @@ let wordList: [Word] = [
 
     Word(id: 65, russian: "открывать", transliteration: "atkryvAt", translation: "to open",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Я открываю окно.", exampleTranslation: "I'm opening the window.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "открыть",
             pastMasculine: "открывал", pastFeminine: "открывала", pastNeuter: "открывало", pastPlural: "открывали",
@@ -509,6 +575,7 @@ let wordList: [Word] = [
 
     Word(id: 66, russian: "открыть", transliteration: "atkrYt", translation: "to open (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Открой дверь, пожалуйста.", exampleTranslation: "Open the door, please.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "открывать",
             pastMasculine: "открыл", pastFeminine: "открыла", pastNeuter: "открыло", pastPlural: "открыли",
@@ -517,6 +584,7 @@ let wordList: [Word] = [
 
     Word(id: 67, russian: "закрывать", transliteration: "zakryvAt", translation: "to close",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Я закрываю окно.", exampleTranslation: "I'm closing the window.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "закрыть",
             pastMasculine: "закрывал", pastFeminine: "закрывала", pastNeuter: "закрывало", pastPlural: "закрывали",
@@ -525,6 +593,7 @@ let wordList: [Word] = [
 
     Word(id: 68, russian: "закрыть", transliteration: "zakrYt", translation: "to close (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Закрой дверь.", exampleTranslation: "Close the door.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "закрывать",
             pastMasculine: "закрыл", pastFeminine: "закрыла", pastNeuter: "закрыло", pastPlural: "закрыли",
@@ -533,6 +602,7 @@ let wordList: [Word] = [
 
     Word(id: 69, russian: "находить", transliteration: "nakhadIt", translation: "to find",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Я нахожу это интересным.", exampleTranslation: "I find it interesting.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "найти",
             pastMasculine: "находил", pastFeminine: "находила", pastNeuter: "находило", pastPlural: "находили",
@@ -541,6 +611,7 @@ let wordList: [Word] = [
 
     Word(id: 70, russian: "найти", transliteration: "naytI", translation: "to find (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я нашёл ключи.", exampleTranslation: "I found the keys.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "находить",
             pastMasculine: "нашёл", pastFeminine: "нашла", pastNeuter: "нашло", pastPlural: "нашли",
@@ -549,6 +620,7 @@ let wordList: [Word] = [
 
     Word(id: 71, russian: "терять", transliteration: "teRYAt", translation: "to lose",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я теряю терпение.", exampleTranslation: "I'm losing patience.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "потерять",
             pastMasculine: "терял", pastFeminine: "теряла", pastNeuter: "теряло", pastPlural: "теряли",
@@ -557,6 +629,7 @@ let wordList: [Word] = [
 
     Word(id: 72, russian: "встречать", transliteration: "fstrechAt", translation: "to meet",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Я встречаю друзей.", exampleTranslation: "I'm meeting friends.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "встретить",
             pastMasculine: "встречал", pastFeminine: "встречала", pastNeuter: "встречало", pastPlural: "встречали",
@@ -565,6 +638,7 @@ let wordList: [Word] = [
 
     Word(id: 73, russian: "встретить", transliteration: "fstRYEtit", translation: "to meet (once)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я встретил старого друга.", exampleTranslation: "I met an old friend.",
          verbDetails: VerbDetails(aspect: "perfective", aspectPair: "встречать",
             pastMasculine: "встретил", pastFeminine: "встретила", pastNeuter: "встретило", pastPlural: "встретили",
@@ -573,6 +647,7 @@ let wordList: [Word] = [
 
     Word(id: 74, russian: "звонить", transliteration: "zvanIt", translation: "to call (phone)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я звоню маме.", exampleTranslation: "I'm calling my mom.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "позвонить",
             pastMasculine: "звонил", pastFeminine: "звонила", pastNeuter: "звонило", pastPlural: "звонили",
@@ -581,6 +656,7 @@ let wordList: [Word] = [
 
     Word(id: 75, russian: "просить", transliteration: "prasIt", translation: "to ask / request",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я прошу помощи.", exampleTranslation: "I'm asking for help.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "попросить",
             pastMasculine: "просил", pastFeminine: "просила", pastNeuter: "просило", pastPlural: "просили",
@@ -589,6 +665,7 @@ let wordList: [Word] = [
 
     Word(id: 76, russian: "ждать", transliteration: "zhdat", translation: "to wait",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я жду тебя.", exampleTranslation: "I'm waiting for you.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "подождать",
             pastMasculine: "ждал", pastFeminine: "ждала", pastNeuter: "ждало", pastPlural: "ждали",
@@ -597,6 +674,7 @@ let wordList: [Word] = [
 
     Word(id: 77, russian: "есть", transliteration: "yest", translation: "to eat",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 0,
          exampleRussian: "Я хочу есть.", exampleTranslation: "I want to eat.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "съесть",
             pastMasculine: "ел", pastFeminine: "ела", pastNeuter: "ело", pastPlural: "ели",
@@ -605,6 +683,7 @@ let wordList: [Word] = [
 
     Word(id: 78, russian: "пить", transliteration: "pit", translation: "to drink",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 1,
          exampleRussian: "Я пью чай.", exampleTranslation: "I'm drinking tea.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "выпить",
             pastMasculine: "пил", pastFeminine: "пила", pastNeuter: "пило", pastPlural: "пили",
@@ -613,6 +692,7 @@ let wordList: [Word] = [
 
     Word(id: 79, russian: "спать", transliteration: "spat", translation: "to sleep",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Я хочу спать.", exampleTranslation: "I want to sleep.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поспать",
             pastMasculine: "спал", pastFeminine: "спала", pastNeuter: "спало", pastPlural: "спали",
@@ -621,6 +701,7 @@ let wordList: [Word] = [
 
     Word(id: 80, russian: "сидеть", transliteration: "sidYEt", translation: "to sit",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Я сижу дома.", exampleTranslation: "I'm sitting at home.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "посидеть",
             pastMasculine: "сидел", pastFeminine: "сидела", pastNeuter: "сидело", pastPlural: "сидели",
@@ -629,6 +710,7 @@ let wordList: [Word] = [
 
     Word(id: 81, russian: "стоять", transliteration: "stayAt", translation: "to stand",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Машина стоит на улице.", exampleTranslation: "The car is standing on the street.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "постоять",
             pastMasculine: "стоял", pastFeminine: "стояла", pastNeuter: "стояло", pastPlural: "стояли",
@@ -637,6 +719,7 @@ let wordList: [Word] = [
 
     Word(id: 82, russian: "лежать", transliteration: "lyezhAt", translation: "to lie (down)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Книга лежит на столе.", exampleTranslation: "The book is lying on the table.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "полежать",
             pastMasculine: "лежал", pastFeminine: "лежала", pastNeuter: "лежало", pastPlural: "лежали",
@@ -645,6 +728,7 @@ let wordList: [Word] = [
 
     Word(id: 83, russian: "ехать", transliteration: "Yekhat", translation: "to go (by vehicle)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 0,
          exampleRussian: "Мы едем в Москву.", exampleTranslation: "We are going to Moscow.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поехать",
             pastMasculine: "ехал", pastFeminine: "ехала", pastNeuter: "ехало", pastPlural: "ехали",
@@ -653,6 +737,7 @@ let wordList: [Word] = [
 
     Word(id: 84, russian: "лететь", transliteration: "lyetYEt", translation: "to fly",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Самолёт летит высоко.", exampleTranslation: "The plane is flying high.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "полететь",
             pastMasculine: "летел", pastFeminine: "летела", pastNeuter: "летело", pastPlural: "летели",
@@ -661,6 +746,7 @@ let wordList: [Word] = [
 
     Word(id: 85, russian: "бежать", transliteration: "byezhAt", translation: "to run",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 3,
          exampleRussian: "Собака бежит быстро.", exampleTranslation: "The dog is running fast.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "побежать",
             pastMasculine: "бежал", pastFeminine: "бежала", pastNeuter: "бежало", pastPlural: "бежали",
@@ -669,6 +755,7 @@ let wordList: [Word] = [
 
     Word(id: 86, russian: "приезжать", transliteration: "priyezhAt", translation: "to arrive (by vehicle)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Гости приезжают завтра.", exampleTranslation: "The guests arrive tomorrow.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "приехать",
             pastMasculine: "приезжал", pastFeminine: "приезжала", pastNeuter: "приезжало", pastPlural: "приезжали",
@@ -677,6 +764,7 @@ let wordList: [Word] = [
 
     Word(id: 87, russian: "уезжать", transliteration: "uyezhAt", translation: "to leave (by vehicle)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я уезжаю завтра.", exampleTranslation: "I'm leaving tomorrow.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "уехать",
             pastMasculine: "уезжал", pastFeminine: "уезжала", pastNeuter: "уезжало", pastPlural: "уезжали",
@@ -685,6 +773,7 @@ let wordList: [Word] = [
 
     Word(id: 88, russian: "приходить", transliteration: "prikhadIt", translation: "to come",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 6,
          exampleRussian: "Он приходит домой поздно.", exampleTranslation: "He comes home late.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "прийти",
             pastMasculine: "приходил", pastFeminine: "приходила", pastNeuter: "приходило", pastPlural: "приходили",
@@ -693,6 +782,7 @@ let wordList: [Word] = [
 
     Word(id: 89, russian: "уходить", transliteration: "ukhadIt", translation: "to leave",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Я ухожу на работу.", exampleTranslation: "I'm leaving for work.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "уйти",
             pastMasculine: "уходил", pastFeminine: "уходила", pastNeuter: "уходило", pastPlural: "уходили",
@@ -701,6 +791,7 @@ let wordList: [Word] = [
 
     Word(id: 90, russian: "входить", transliteration: "vkhadIt", translation: "to enter",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 4,
          exampleRussian: "Он входит в комнату.", exampleTranslation: "He is entering the room.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "войти",
             pastMasculine: "входил", pastFeminine: "входила", pastNeuter: "входило", pastPlural: "входили",
@@ -709,6 +800,7 @@ let wordList: [Word] = [
 
     Word(id: 91, russian: "выходить", transliteration: "vykhadIt", translation: "to exit",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Мы выходим на следующей станции.", exampleTranslation: "We're getting off at the next station.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "выйти",
             pastMasculine: "выходил", pastFeminine: "выходила", pastNeuter: "выходило", pastPlural: "выходили",
@@ -717,6 +809,7 @@ let wordList: [Word] = [
 
     Word(id: 92, russian: "заходить", transliteration: "zakhadIt", translation: "to stop by",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 5,
          exampleRussian: "Заходи в гости!", exampleTranslation: "Come visit!",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "зайти",
             pastMasculine: "заходил", pastFeminine: "заходила", pastNeuter: "заходило", pastPlural: "заходили",
@@ -725,6 +818,7 @@ let wordList: [Word] = [
 
     Word(id: 93, russian: "нравиться", transliteration: "nrAvitsa", translation: "to be pleasing (to like)",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 2,
          exampleRussian: "Мне нравится эта песня.", exampleTranslation: "I like this song.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "понравиться",
             pastMasculine: "нравился", pastFeminine: "нравилась", pastNeuter: "нравилось", pastPlural: "нравились",
@@ -733,12 +827,935 @@ let wordList: [Word] = [
 
     Word(id: 94, russian: "интересоваться", transliteration: "interesavAtsa", translation: "to be interested in",
          partOfSpeech: "verb", gender: nil,
+         stressIndex: 9,
          exampleRussian: "Я интересуюсь музыкой.", exampleTranslation: "I'm interested in music.",
          verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "заинтересоваться",
             pastMasculine: "интересовался", pastFeminine: "интересовалась", pastNeuter: "интересовалось", pastPlural: "интересовались",
             present: ["ya": "интересуюсь", "ty": "интересуешься", "on": "интересуется", "my": "интересуемся", "vy": "интересуетесь", "oni": "интересуются"],
             imperativeInformal: nil, imperativeFormal: nil)),
+
+    // MARK: Batch 3 — everyday nouns and adjectives (ids 95-114)
+
+    Word(id: 95, russian: "женщина", transliteration: "zhEnshchina", translation: "woman",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 1,
+         exampleRussian: "Эта женщина врач.", exampleTranslation: "This woman is a doctor.",
+         verbDetails: nil),
+
+    Word(id: 96, russian: "мужчина", transliteration: "mushchIna", translation: "man",
+         partOfSpeech: "noun", gender: "masculine", stressIndex: 4,
+         exampleRussian: "Этот мужчина учитель.", exampleTranslation: "This man is a teacher.",
+         verbDetails: nil),
+
+    Word(id: 97, russian: "ребёнок", transliteration: "ryebYOnak", translation: "child",
+         partOfSpeech: "noun", gender: "masculine", stressIndex: 3,
+         exampleRussian: "У неё есть ребёнок.", exampleTranslation: "She has a child.",
+         verbDetails: nil),
+
+    Word(id: 98, russian: "друг", transliteration: "druk", translation: "friend",
+         partOfSpeech: "noun", gender: "masculine", stressIndex: 2,
+         exampleRussian: "Он мой лучший друг.", exampleTranslation: "He is my best friend.",
+         verbDetails: nil),
+
+    Word(id: 99, russian: "семья", transliteration: "syemyA", translation: "family",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 4,
+         exampleRussian: "У меня большая семья.", exampleTranslation: "I have a big family.",
+         verbDetails: nil),
+
+    Word(id: 100, russian: "работа", transliteration: "rabOta", translation: "work / job",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 3,
+         exampleRussian: "Я иду на работу.", exampleTranslation: "I'm going to work.",
+         verbDetails: nil),
+
+    Word(id: 101, russian: "школа", transliteration: "shkOla", translation: "school",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 2,
+         exampleRussian: "Дети идут в школу.", exampleTranslation: "The kids are going to school.",
+         verbDetails: nil),
+
+    Word(id: 102, russian: "город", transliteration: "gOrat", translation: "city",
+         partOfSpeech: "noun", gender: "masculine", stressIndex: 1,
+         exampleRussian: "Москва большой город.", exampleTranslation: "Moscow is a big city.",
+         verbDetails: nil),
+
+    Word(id: 103, russian: "страна", transliteration: "stranA", translation: "country",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 5,
+         exampleRussian: "Россия большая страна.", exampleTranslation: "Russia is a big country.",
+         verbDetails: nil),
+
+    Word(id: 104, russian: "язык", transliteration: "yazYk", translation: "language / tongue",
+         partOfSpeech: "noun", gender: "masculine", stressIndex: 2,
+         exampleRussian: "Русский язык трудный.", exampleTranslation: "The Russian language is hard.",
+         verbDetails: nil),
+
+    Word(id: 105, russian: "слово", transliteration: "slOva", translation: "word",
+         partOfSpeech: "noun", gender: "neuter", stressIndex: 2,
+         exampleRussian: "Это новое слово.", exampleTranslation: "This is a new word.",
+         verbDetails: nil),
+
+    Word(id: 106, russian: "книга", transliteration: "knIga", translation: "book",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 2,
+         exampleRussian: "Я читаю книгу.", exampleTranslation: "I'm reading a book.",
+         verbDetails: nil),
+
+    Word(id: 107, russian: "машина", transliteration: "mashIna", translation: "car",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 3,
+         exampleRussian: "У него новая машина.", exampleTranslation: "He has a new car.",
+         verbDetails: nil),
+
+    Word(id: 108, russian: "деньги", transliteration: "dYEngi", translation: "money",
+         partOfSpeech: "noun", gender: nil, stressIndex: 1,
+         exampleRussian: "У меня нет денег.", exampleTranslation: "I don't have money.",
+         verbDetails: nil),
+
+    Word(id: 109, russian: "еда", transliteration: "yedA", translation: "food",
+         partOfSpeech: "noun", gender: "feminine", stressIndex: 2,
+         exampleRussian: "Еда очень вкусная.", exampleTranslation: "The food is very tasty.",
+         verbDetails: nil),
+
+    Word(id: 110, russian: "хороший", transliteration: "kharOshiy", translation: "good",
+         partOfSpeech: "adjective", gender: nil, stressIndex: 3,
+         exampleRussian: "Он хороший человек.", exampleTranslation: "He is a good person.",
+         verbDetails: nil),
+
+    Word(id: 111, russian: "плохой", transliteration: "plakhOy", translation: "bad",
+         partOfSpeech: "adjective", gender: nil, stressIndex: 4,
+         exampleRussian: "Это плохая идея.", exampleTranslation: "That's a bad idea.",
+         verbDetails: nil),
+
+    Word(id: 112, russian: "большой", transliteration: "bal'shOy", translation: "big",
+         partOfSpeech: "adjective", gender: nil, stressIndex: 5,
+         exampleRussian: "У них большой дом.", exampleTranslation: "They have a big house.",
+         verbDetails: nil),
+
+    Word(id: 113, russian: "маленький", transliteration: "mAlen'kiy", translation: "small",
+         partOfSpeech: "adjective", gender: nil, stressIndex: 1,
+         exampleRussian: "У меня маленькая квартира.", exampleTranslation: "I have a small apartment.",
+         verbDetails: nil),
+
+    Word(id: 114, russian: "новый", transliteration: "nOvyy", translation: "new",
+         partOfSpeech: "adjective", gender: nil, stressIndex: 1,
+         exampleRussian: "Это новый телефон.", exampleTranslation: "This is a new phone.",
+         verbDetails: nil),
+
+    // MARK: Batch 4 — 50 more verbs, intermediate level (ids 115-164)
+
+    Word(id: 115, russian: "решать", transliteration: "reshAt", translation: "to decide / solve",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я решаю проблему.", exampleTranslation: "I'm solving the problem.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "решить",
+            pastMasculine: "решал", pastFeminine: "решала", pastNeuter: "решало", pastPlural: "решали",
+            present: ["ya": "решаю", "ty": "решаешь", "on": "решает", "my": "решаем", "vy": "решаете", "oni": "решают"],
+            imperativeInformal: "решай", imperativeFormal: "решайте")),
+
+    Word(id: 116, russian: "решить", transliteration: "reshIt", translation: "to decide (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я решил остаться.", exampleTranslation: "I decided to stay.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "решать",
+            pastMasculine: "решил", pastFeminine: "решила", pastNeuter: "решило", pastPlural: "решили",
+            present: ["ya": "решу", "ty": "решишь", "on": "решит", "my": "решим", "vy": "решите", "oni": "решат"],
+            imperativeInformal: "реши", imperativeFormal: "решите")),
+
+    Word(id: 117, russian: "объяснять", transliteration: "abyasnYAt", translation: "to explain",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Учитель объясняет урок.", exampleTranslation: "The teacher explains the lesson.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "объяснить",
+            pastMasculine: "объяснял", pastFeminine: "объясняла", pastNeuter: "объясняло", pastPlural: "объясняли",
+            present: ["ya": "объясняю", "ty": "объясняешь", "on": "объясняет", "my": "объясняем", "vy": "объясняете", "oni": "объясняют"],
+            imperativeInformal: "объясняй", imperativeFormal: "объясняйте")),
+
+    Word(id: 118, russian: "объяснить", transliteration: "abyasnIt", translation: "to explain (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Можешь объяснить это?", exampleTranslation: "Can you explain this?",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "объяснять",
+            pastMasculine: "объяснил", pastFeminine: "объяснила", pastNeuter: "объяснило", pastPlural: "объяснили",
+            present: ["ya": "объясню", "ty": "объяснишь", "on": "объяснит", "my": "объясним", "vy": "объясните", "oni": "объяснят"],
+            imperativeInformal: "объясни", imperativeFormal: "объясните")),
+
+    Word(id: 119, russian: "понять", transliteration: "panYAt", translation: "to understand (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я понял вопрос.", exampleTranslation: "I understood the question.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "понимать",
+            pastMasculine: "понял", pastFeminine: "поняла", pastNeuter: "поняло", pastPlural: "поняли",
+            present: ["ya": "пойму", "ty": "поймёшь", "on": "поймёт", "my": "поймём", "vy": "поймёте", "oni": "поймут"],
+            imperativeInformal: "пойми", imperativeFormal: "поймите")),
+
+    Word(id: 120, russian: "знакомиться", transliteration: "znakOmitsa", translation: "to get acquainted",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я знакомлюсь с новыми людьми.", exampleTranslation: "I'm meeting new people.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "познакомиться",
+            pastMasculine: "знакомился", pastFeminine: "знакомилась", pastNeuter: "знакомилось", pastPlural: "знакомились",
+            present: ["ya": "знакомлюсь", "ty": "знакомишься", "on": "знакомится", "my": "знакомимся", "vy": "знакомитесь", "oni": "знакомятся"],
+            imperativeInformal: "знакомься", imperativeFormal: "знакомьтесь")),
+
+    Word(id: 121, russian: "познакомиться", transliteration: "paznakOmitsa", translation: "to get acquainted (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Приятно познакомиться.", exampleTranslation: "Nice to meet you.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "знакомиться",
+            pastMasculine: "познакомился", pastFeminine: "познакомилась", pastNeuter: "познакомилось", pastPlural: "познакомились",
+            present: ["ya": "познакомлюсь", "ty": "познакомишься", "on": "познакомится", "my": "познакомимся", "vy": "познакомитесь", "oni": "познакомятся"],
+            imperativeInformal: "познакомься", imperativeFormal: "познакомьтесь")),
+
+    Word(id: 122, russian: "чувствовать", transliteration: "chUstvavat", translation: "to feel",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я чувствую себя хорошо.", exampleTranslation: "I feel good.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "почувствовать",
+            pastMasculine: "чувствовал", pastFeminine: "чувствовала", pastNeuter: "чувствовало", pastPlural: "чувствовали",
+            present: ["ya": "чувствую", "ty": "чувствуешь", "on": "чувствует", "my": "чувствуем", "vy": "чувствуете", "oni": "чувствуют"],
+            imperativeInformal: "чувствуй", imperativeFormal: "чувствуйте")),
+
+    Word(id: 123, russian: "казаться", transliteration: "kazAtsa", translation: "to seem",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Мне кажется, что он прав.", exampleTranslation: "It seems to me he's right.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "показаться",
+            pastMasculine: "казался", pastFeminine: "казалась", pastNeuter: "казалось", pastPlural: "казались",
+            present: ["ya": "кажусь", "ty": "кажешься", "on": "кажется", "my": "кажемся", "vy": "кажетесь", "oni": "кажутся"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 124, russian: "оставаться", transliteration: "astavAtsa", translation: "to remain / stay",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я остаюсь дома.", exampleTranslation: "I'm staying home.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "остаться",
+            pastMasculine: "оставался", pastFeminine: "оставалась", pastNeuter: "оставалось", pastPlural: "оставались",
+            present: ["ya": "остаюсь", "ty": "остаёшься", "on": "остаётся", "my": "остаёмся", "vy": "остаётесь", "oni": "остаются"],
+            imperativeInformal: "оставайся", imperativeFormal: "оставайтесь")),
+
+    Word(id: 125, russian: "остаться", transliteration: "astAtsa", translation: "to remain (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я хочу остаться здесь.", exampleTranslation: "I want to stay here.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "оставаться",
+            pastMasculine: "остался", pastFeminine: "осталась", pastNeuter: "осталось", pastPlural: "остались",
+            present: ["ya": "останусь", "ty": "останешься", "on": "останется", "my": "останемся", "vy": "останетесь", "oni": "останутся"],
+            imperativeInformal: "останься", imperativeFormal: "останьтесь")),
+
+    Word(id: 126, russian: "становиться", transliteration: "stanavItsa", translation: "to become (ongoing)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Погода становится холодной.", exampleTranslation: "The weather is becoming cold.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "стать",
+            pastMasculine: "становился", pastFeminine: "становилась", pastNeuter: "становилось", pastPlural: "становились",
+            present: ["ya": "становлюсь", "ty": "становишься", "on": "становится", "my": "становимся", "vy": "становитесь", "oni": "становятся"],
+            imperativeInformal: "становись", imperativeFormal: "становитесь")),
+
+    Word(id: 127, russian: "заниматься", transliteration: "zanimAtsa", translation: "to be engaged in / study",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я занимаюсь спортом.", exampleTranslation: "I do sports.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "позаниматься",
+            pastMasculine: "занимался", pastFeminine: "занималась", pastNeuter: "занималось", pastPlural: "занимались",
+            present: ["ya": "занимаюсь", "ty": "занимаешься", "on": "занимается", "my": "занимаемся", "vy": "занимаетесь", "oni": "занимаются"],
+            imperativeInformal: "занимайся", imperativeFormal: "занимайтесь")),
+
+    Word(id: 128, russian: "волноваться", transliteration: "valnavAtsa", translation: "to worry",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Не волнуйся, всё хорошо.", exampleTranslation: "Don't worry, everything's fine.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поволноваться",
+            pastMasculine: "волновался", pastFeminine: "волновалась", pastNeuter: "волновалось", pastPlural: "волновались",
+            present: ["ya": "волнуюсь", "ty": "волнуешься", "on": "волнуется", "my": "волнуемся", "vy": "волнуетесь", "oni": "волнуются"],
+            imperativeInformal: "волнуйся", imperativeFormal: "волнуйтесь")),
+
+    Word(id: 129, russian: "бояться", transliteration: "bayAtsa", translation: "to be afraid",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Я боюсь темноты.", exampleTranslation: "I'm afraid of the dark.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "боялся", pastFeminine: "боялась", pastNeuter: "боялось", pastPlural: "боялись",
+            present: ["ya": "боюсь", "ty": "боишься", "on": "боится", "my": "боимся", "vy": "боитесь", "oni": "боятся"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 130, russian: "надеяться", transliteration: "nadYEyatsa", translation: "to hope",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я надеюсь на лучшее.", exampleTranslation: "I hope for the best.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "надеялся", pastFeminine: "надеялась", pastNeuter: "надеялось", pastPlural: "надеялись",
+            present: ["ya": "надеюсь", "ty": "надеешься", "on": "надеется", "my": "надеемся", "vy": "надеетесь", "oni": "надеются"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 131, russian: "верить", transliteration: "vYErit", translation: "to believe",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я тебе верю.", exampleTranslation: "I believe you.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поверить",
+            pastMasculine: "верил", pastFeminine: "верила", pastNeuter: "верило", pastPlural: "верили",
+            present: ["ya": "верю", "ty": "веришь", "on": "верит", "my": "верим", "vy": "верите", "oni": "верят"],
+            imperativeInformal: "верь", imperativeFormal: "верьте")),
+
+    Word(id: 132, russian: "поверить", transliteration: "pavYErit", translation: "to believe (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я тебе не поверил.", exampleTranslation: "I didn't believe you.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "верить",
+            pastMasculine: "поверил", pastFeminine: "поверила", pastNeuter: "поверило", pastPlural: "поверили",
+            present: ["ya": "поверю", "ty": "поверишь", "on": "поверит", "my": "поверим", "vy": "поверите", "oni": "поверят"],
+            imperativeInformal: "поверь", imperativeFormal: "поверьте")),
+
+    Word(id: 133, russian: "мешать", transliteration: "myeshAt", translation: "to bother / interfere",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Извини, я не хотел мешать.", exampleTranslation: "Sorry, I didn't mean to interrupt.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "помешать",
+            pastMasculine: "мешал", pastFeminine: "мешала", pastNeuter: "мешало", pastPlural: "мешали",
+            present: ["ya": "мешаю", "ty": "мешаешь", "on": "мешает", "my": "мешаем", "vy": "мешаете", "oni": "мешают"],
+            imperativeInformal: "мешай", imperativeFormal: "мешайте")),
+
+    Word(id: 134, russian: "менять", transliteration: "menYAt", translation: "to change (something)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я меняю планы.", exampleTranslation: "I'm changing my plans.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поменять",
+            pastMasculine: "менял", pastFeminine: "меняла", pastNeuter: "меняло", pastPlural: "меняли",
+            present: ["ya": "меняю", "ty": "меняешь", "on": "меняет", "my": "меняем", "vy": "меняете", "oni": "меняют"],
+            imperativeInformal: "меняй", imperativeFormal: "меняйте")),
+
+    Word(id: 135, russian: "меняться", transliteration: "menYAtsa", translation: "to change (oneself)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Люди меняются со временем.", exampleTranslation: "People change over time.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "измениться",
+            pastMasculine: "менялся", pastFeminine: "менялась", pastNeuter: "менялось", pastPlural: "менялись",
+            present: ["ya": "меняюсь", "ty": "меняешься", "on": "меняется", "my": "меняемся", "vy": "меняетесь", "oni": "меняются"],
+            imperativeInformal: "меняйся", imperativeFormal: "меняйтесь")),
+
+    Word(id: 136, russian: "готовить", transliteration: "gatOvit", translation: "to cook / prepare",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я готовлю ужин.", exampleTranslation: "I'm cooking dinner.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "приготовить",
+            pastMasculine: "готовил", pastFeminine: "готовила", pastNeuter: "готовило", pastPlural: "готовили",
+            present: ["ya": "готовлю", "ty": "готовишь", "on": "готовит", "my": "готовим", "vy": "готовите", "oni": "готовят"],
+            imperativeInformal: "готовь", imperativeFormal: "готовьте")),
+
+    Word(id: 137, russian: "приготовить", transliteration: "prigatOvit", translation: "to cook / prepare (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Я приготовил обед.", exampleTranslation: "I made lunch.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "готовить",
+            pastMasculine: "приготовил", pastFeminine: "приготовила", pastNeuter: "приготовило", pastPlural: "приготовили",
+            present: ["ya": "приготовлю", "ty": "приготовишь", "on": "приготовит", "my": "приготовим", "vy": "приготовите", "oni": "приготовят"],
+            imperativeInformal: "приготовь", imperativeFormal: "приготовьте")),
+
+    Word(id: 138, russian: "готовиться", transliteration: "gatOvitsa", translation: "to prepare oneself",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я готовлюсь к экзамену.", exampleTranslation: "I'm preparing for the exam.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "подготовиться",
+            pastMasculine: "готовился", pastFeminine: "готовилась", pastNeuter: "готовилось", pastPlural: "готовились",
+            present: ["ya": "готовлюсь", "ty": "готовишься", "on": "готовится", "my": "готовимся", "vy": "готовитесь", "oni": "готовятся"],
+            imperativeInformal: "готовься", imperativeFormal: "готовьтесь")),
+
+    Word(id: 139, russian: "убирать", transliteration: "ubirAt", translation: "to clean up / tidy",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я убираю комнату.", exampleTranslation: "I'm cleaning the room.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "убрать",
+            pastMasculine: "убирал", pastFeminine: "убирала", pastNeuter: "убирало", pastPlural: "убирали",
+            present: ["ya": "убираю", "ty": "убираешь", "on": "убирает", "my": "убираем", "vy": "убираете", "oni": "убирают"],
+            imperativeInformal: "убирай", imperativeFormal: "убирайте")),
+
+    Word(id: 140, russian: "убрать", transliteration: "ubrAt", translation: "to clean up (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Убери свою комнату.", exampleTranslation: "Clean up your room.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "убирать",
+            pastMasculine: "убрал", pastFeminine: "убрала", pastNeuter: "убрало", pastPlural: "убрали",
+            present: ["ya": "уберу", "ty": "уберёшь", "on": "уберёт", "my": "уберём", "vy": "уберёте", "oni": "уберут"],
+            imperativeInformal: "убери", imperativeFormal: "уберите")),
+
+    Word(id: 141, russian: "мыть", transliteration: "myt", translation: "to wash (something)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я мою посуду.", exampleTranslation: "I'm washing the dishes.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "помыть",
+            pastMasculine: "мыл", pastFeminine: "мыла", pastNeuter: "мыло", pastPlural: "мыли",
+            present: ["ya": "мою", "ty": "моешь", "on": "моет", "my": "моем", "vy": "моете", "oni": "моют"],
+            imperativeInformal: "мой", imperativeFormal: "мойте")),
+
+    Word(id: 142, russian: "мыться", transliteration: "mYtsa", translation: "to wash oneself",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я мoюсь утром.", exampleTranslation: "I wash up in the morning.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "помыться",
+            pastMasculine: "мылся", pastFeminine: "мылась", pastNeuter: "мылось", pastPlural: "мылись",
+            present: ["ya": "моюсь", "ty": "моешься", "on": "моется", "my": "моемся", "vy": "моетесь", "oni": "моются"],
+            imperativeInformal: "мойся", imperativeFormal: "мойтесь")),
+
+    Word(id: 143, russian: "одеваться", transliteration: "adevAtsa", translation: "to get dressed",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я быстро одеваюсь.", exampleTranslation: "I get dressed quickly.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "одеться",
+            pastMasculine: "одевался", pastFeminine: "одевалась", pastNeuter: "одевалось", pastPlural: "одевались",
+            present: ["ya": "одеваюсь", "ty": "одеваешься", "on": "одевается", "my": "одеваемся", "vy": "одеваетесь", "oni": "одеваются"],
+            imperativeInformal: "одевайся", imperativeFormal: "одевайтесь")),
+
+    Word(id: 144, russian: "одеться", transliteration: "adYEtsa", translation: "to get dressed (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Оденься тепло.", exampleTranslation: "Dress warmly.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "одеваться",
+            pastMasculine: "оделся", pastFeminine: "оделась", pastNeuter: "оделось", pastPlural: "оделись",
+            present: ["ya": "оденусь", "ty": "оденешься", "on": "оденется", "my": "оденемся", "vy": "оденетесь", "oni": "оденутся"],
+            imperativeInformal: "оденься", imperativeFormal: "оденьтесь")),
+
+    Word(id: 145, russian: "просыпаться", transliteration: "prasypAtsa", translation: "to wake up",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Я просыпаюсь рано.", exampleTranslation: "I wake up early.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "проснуться",
+            pastMasculine: "просыпался", pastFeminine: "просыпалась", pastNeuter: "просыпалось", pastPlural: "просыпались",
+            present: ["ya": "просыпаюсь", "ty": "просыпаешься", "on": "просыпается", "my": "просыпаемся", "vy": "просыпаетесь", "oni": "просыпаются"],
+            imperativeInformal: "просыпайся", imperativeFormal: "просыпайтесь")),
+
+    Word(id: 146, russian: "проснуться", transliteration: "prasnUtsa", translation: "to wake up (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я проснулся поздно.", exampleTranslation: "I woke up late.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "просыпаться",
+            pastMasculine: "проснулся", pastFeminine: "проснулась", pastNeuter: "проснулось", pastPlural: "проснулись",
+            present: ["ya": "проснусь", "ty": "проснёшься", "on": "проснётся", "my": "проснёмся", "vy": "проснётесь", "oni": "проснутся"],
+            imperativeInformal: "проснись", imperativeFormal: "проснитесь")),
+
+    Word(id: 147, russian: "засыпать", transliteration: "zasypAt", translation: "to fall asleep",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я засыпаю поздно.", exampleTranslation: "I fall asleep late.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "заснуть",
+            pastMasculine: "засыпал", pastFeminine: "засыпала", pastNeuter: "засыпало", pastPlural: "засыпали",
+            present: ["ya": "засыпаю", "ty": "засыпаешь", "on": "засыпает", "my": "засыпаем", "vy": "засыпаете", "oni": "засыпают"],
+            imperativeInformal: "засыпай", imperativeFormal: "засыпайте")),
+
+    Word(id: 148, russian: "заснуть", transliteration: "zasnUt", translation: "to fall asleep (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я не мог заснуть.", exampleTranslation: "I couldn't fall asleep.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "засыпать",
+            pastMasculine: "заснул", pastFeminine: "заснула", pastNeuter: "заснуло", pastPlural: "заснули",
+            present: ["ya": "засну", "ty": "заснёшь", "on": "заснёт", "my": "заснём", "vy": "заснёте", "oni": "заснут"],
+            imperativeInformal: "засни", imperativeFormal: "засните")),
+
+    Word(id: 149, russian: "вставать", transliteration: "fstavAt", translation: "to get up",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я встаю в семь утра.", exampleTranslation: "I get up at seven.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "встать",
+            pastMasculine: "вставал", pastFeminine: "вставала", pastNeuter: "вставало", pastPlural: "вставали",
+            present: ["ya": "встаю", "ty": "встаёшь", "on": "встаёт", "my": "встаём", "vy": "встаёте", "oni": "встают"],
+            imperativeInformal: "вставай", imperativeFormal: "вставайте")),
+
+    Word(id: 150, russian: "встать", transliteration: "fstat", translation: "to get up (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Встань, пожалуйста.", exampleTranslation: "Please stand up.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "вставать",
+            pastMasculine: "встал", pastFeminine: "встала", pastNeuter: "встало", pastPlural: "встали",
+            present: ["ya": "встану", "ty": "встанешь", "on": "встанет", "my": "встанем", "vy": "встанете", "oni": "встанут"],
+            imperativeInformal: "встань", imperativeFormal: "встаньте")),
+
+    Word(id: 151, russian: "ложиться", transliteration: "lazhItsa", translation: "to lie down",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я ложусь спать в десять.", exampleTranslation: "I go to bed at ten.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "лечь",
+            pastMasculine: "ложился", pastFeminine: "ложилась", pastNeuter: "ложилось", pastPlural: "ложились",
+            present: ["ya": "ложусь", "ty": "ложишься", "on": "ложится", "my": "ложимся", "vy": "ложитесь", "oni": "ложатся"],
+            imperativeInformal: "ложись", imperativeFormal: "ложитесь")),
+
+    Word(id: 152, russian: "лечь", transliteration: "lyech", translation: "to lie down (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я хочу лечь пораньше.", exampleTranslation: "I want to go to bed early.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "ложиться",
+            pastMasculine: "лёг", pastFeminine: "легла", pastNeuter: "легло", pastPlural: "легли",
+            present: ["ya": "лягу", "ty": "ляжешь", "on": "ляжет", "my": "ляжем", "vy": "ляжете", "oni": "лягут"],
+            imperativeInformal: "ляг", imperativeFormal: "лягте")),
+
+    Word(id: 153, russian: "садиться", transliteration: "sadItsa", translation: "to sit down",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Садитесь, пожалуйста.", exampleTranslation: "Please have a seat.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "сесть",
+            pastMasculine: "садился", pastFeminine: "садилась", pastNeuter: "садилось", pastPlural: "садились",
+            present: ["ya": "сажусь", "ty": "садишься", "on": "садится", "my": "садимся", "vy": "садитесь", "oni": "садятся"],
+            imperativeInformal: "садись", imperativeFormal: "садитесь")),
+
+    Word(id: 154, russian: "сесть", transliteration: "syest", translation: "to sit down (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Сядь рядом со мной.", exampleTranslation: "Sit next to me.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "садиться",
+            pastMasculine: "сел", pastFeminine: "села", pastNeuter: "село", pastPlural: "сели",
+            present: ["ya": "сяду", "ty": "сядешь", "on": "сядет", "my": "сядем", "vy": "сядете", "oni": "сядут"],
+            imperativeInformal: "сядь", imperativeFormal: "сядьте")),
+
+    Word(id: 155, russian: "останавливаться", transliteration: "astanAvlivatsa", translation: "to stop (oneself)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Мы не останавливаемся.", exampleTranslation: "We don't stop.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "остановиться",
+            pastMasculine: "останавливался", pastFeminine: "останавливалась", pastNeuter: "останавливалось", pastPlural: "останавливались",
+            present: ["ya": "останавливаюсь", "ty": "останавливаешься", "on": "останавливается", "my": "останавливаемся", "vy": "останавливаетесь", "oni": "останавливаются"],
+            imperativeInformal: "останавливайся", imperativeFormal: "останавливайтесь")),
+
+    Word(id: 156, russian: "остановиться", transliteration: "astanavItsa", translation: "to stop (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 7,
+         exampleRussian: "Машина остановилась.", exampleTranslation: "The car stopped.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "останавливаться",
+            pastMasculine: "остановился", pastFeminine: "остановилась", pastNeuter: "остановилось", pastPlural: "остановились",
+            present: ["ya": "остановлюсь", "ty": "остановишься", "on": "остановится", "my": "остановимся", "vy": "остановитесь", "oni": "остановятся"],
+            imperativeInformal: "остановись", imperativeFormal: "остановитесь")),
+
+    Word(id: 157, russian: "поворачивать", transliteration: "pavarAchivat", translation: "to turn",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Машина поворачивает налево.", exampleTranslation: "The car is turning left.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повернуть",
+            pastMasculine: "поворачивал", pastFeminine: "поворачивала", pastNeuter: "поворачивало", pastPlural: "поворачивали",
+            present: ["ya": "поворачиваю", "ty": "поворачиваешь", "on": "поворачивает", "my": "поворачиваем", "vy": "поворачиваете", "oni": "поворачивают"],
+            imperativeInformal: "поворачивай", imperativeFormal: "поворачивайте")),
+
+    Word(id: 158, russian: "повернуть", transliteration: "pavernUt", translation: "to turn (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Поверни направо.", exampleTranslation: "Turn right.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "поворачивать",
+            pastMasculine: "повернул", pastFeminine: "повернула", pastNeuter: "повернуло", pastPlural: "повернули",
+            present: ["ya": "поверну", "ty": "повернёшь", "on": "повернёт", "my": "повернём", "vy": "повернёте", "oni": "повернут"],
+            imperativeInformal: "поверни", imperativeFormal: "поверните")),
+
+    Word(id: 159, russian: "возвращаться", transliteration: "vazvrashchAtsa", translation: "to return",
+         partOfSpeech: "verb", gender: nil, stressIndex: 7,
+         exampleRussian: "Я возвращаюсь домой.", exampleTranslation: "I'm returning home.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "вернуться",
+            pastMasculine: "возвращался", pastFeminine: "возвращалась", pastNeuter: "возвращалось", pastPlural: "возвращались",
+            present: ["ya": "возвращаюсь", "ty": "возвращаешься", "on": "возвращается", "my": "возвращаемся", "vy": "возвращаетесь", "oni": "возвращаются"],
+            imperativeInformal: "возвращайся", imperativeFormal: "возвращайтесь")),
+
+    Word(id: 160, russian: "вернуться", transliteration: "vernUtsa", translation: "to return (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я скоро вернусь.", exampleTranslation: "I'll be back soon.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "возвращаться",
+            pastMasculine: "вернулся", pastFeminine: "вернулась", pastNeuter: "вернулось", pastPlural: "вернулись",
+            present: ["ya": "вернусь", "ty": "вернёшься", "on": "вернётся", "my": "вернёмся", "vy": "вернётесь", "oni": "вернутся"],
+            imperativeInformal: "вернись", imperativeFormal: "вернитесь")),
+
+    Word(id: 161, russian: "происходить", transliteration: "praiskhadIt", translation: "to happen",
+         partOfSpeech: "verb", gender: nil, stressIndex: 8,
+         exampleRussian: "Что здесь происходит?", exampleTranslation: "What's happening here?",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "произойти",
+            pastMasculine: "происходил", pastFeminine: "происходила", pastNeuter: "происходило", pastPlural: "происходили",
+            present: ["ya": "происхожу", "ty": "происходишь", "on": "происходит", "my": "происходим", "vy": "происходите", "oni": "происходят"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 162, russian: "случаться", transliteration: "sluchAtsa", translation: "to happen / occur",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Это часто случается.", exampleTranslation: "This happens often.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "случиться",
+            pastMasculine: "случался", pastFeminine: "случалась", pastNeuter: "случалось", pastPlural: "случались",
+            present: ["ya": "случаюсь", "ty": "случаешься", "on": "случается", "my": "случаемся", "vy": "случаетесь", "oni": "случаются"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 163, russian: "значить", transliteration: "znAchit", translation: "to mean",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Что это значит?", exampleTranslation: "What does this mean?",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "значил", pastFeminine: "значила", pastNeuter: "значило", pastPlural: "значили",
+            present: ["ya": "значу", "ty": "значишь", "on": "значит", "my": "значим", "vy": "значите", "oni": "значат"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 164, russian: "считать", transliteration: "schitAt", translation: "to count / consider",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я считаю, что это правильно.", exampleTranslation: "I think this is correct.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "посчитать",
+            pastMasculine: "считал", pastFeminine: "считала", pastNeuter: "считало", pastPlural: "считали",
+            present: ["ya": "считаю", "ty": "считаешь", "on": "считает", "my": "считаем", "vy": "считаете", "oni": "считают"],
+            imperativeInformal: "считай", imperativeFormal: "считайте")),
+
+    // MARK: Batch 5 — 50 more verbs to close out today (ids 165-214)
+
+    Word(id: 165, russian: "петь", transliteration: "pyet", translation: "to sing",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я люблю петь.", exampleTranslation: "I love to sing.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "спеть",
+            pastMasculine: "пел", pastFeminine: "пела", pastNeuter: "пело", pastPlural: "пели",
+            present: ["ya": "пою", "ty": "поёшь", "on": "поёт", "my": "поём", "vy": "поёте", "oni": "поют"],
+            imperativeInformal: "пой", imperativeFormal: "пойте")),
+
+    Word(id: 166, russian: "танцевать", transliteration: "tantsevAt", translation: "to dance",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Мы танцуем на вечеринке.", exampleTranslation: "We're dancing at the party.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "потанцевать",
+            pastMasculine: "танцевал", pastFeminine: "танцевала", pastNeuter: "танцевало", pastPlural: "танцевали",
+            present: ["ya": "танцую", "ty": "танцуешь", "on": "танцует", "my": "танцуем", "vy": "танцуете", "oni": "танцуют"],
+            imperativeInformal: "танцуй", imperativeFormal: "танцуйте")),
+
+    Word(id: 167, russian: "рисовать", transliteration: "risavAt", translation: "to draw",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Ребёнок рисует дом.", exampleTranslation: "The child is drawing a house.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "нарисовать",
+            pastMasculine: "рисовал", pastFeminine: "рисовала", pastNeuter: "рисовало", pastPlural: "рисовали",
+            present: ["ya": "рисую", "ty": "рисуешь", "on": "рисует", "my": "рисуем", "vy": "рисуете", "oni": "рисуют"],
+            imperativeInformal: "рисуй", imperativeFormal: "рисуйте")),
+
+    Word(id: 168, russian: "плавать", transliteration: "plAvat", translation: "to swim",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Я умею плавать.", exampleTranslation: "I know how to swim.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "плавал", pastFeminine: "плавала", pastNeuter: "плавало", pastPlural: "плавали",
+            present: ["ya": "плаваю", "ty": "плаваешь", "on": "плавает", "my": "плаваем", "vy": "плаваете", "oni": "плавают"],
+            imperativeInformal: "плавай", imperativeFormal: "плавайте")),
+
+    Word(id: 169, russian: "плыть", transliteration: "plyt", translation: "to swim (in one direction)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Лодка плывёт по реке.", exampleTranslation: "The boat is sailing down the river.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поплыть",
+            pastMasculine: "плыл", pastFeminine: "плыла", pastNeuter: "плыло", pastPlural: "плыли",
+            present: ["ya": "плыву", "ty": "плывёшь", "on": "плывёт", "my": "плывём", "vy": "плывёте", "oni": "плывут"],
+            imperativeInformal: "плыви", imperativeFormal: "плывите")),
+
+    Word(id: 170, russian: "летать", transliteration: "lyetAt", translation: "to fly (general)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Птицы летают высоко.", exampleTranslation: "Birds fly high.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "летал", pastFeminine: "летала", pastNeuter: "летало", pastPlural: "летали",
+            present: ["ya": "летаю", "ty": "летаешь", "on": "летает", "my": "летаем", "vy": "летаете", "oni": "летают"],
+            imperativeInformal: "летай", imperativeFormal: "летайте")),
+
+    Word(id: 171, russian: "ходить", transliteration: "khadIt", translation: "to walk / go (general)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я хожу в школу пешком.", exampleTranslation: "I walk to school.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "сходить",
+            pastMasculine: "ходил", pastFeminine: "ходила", pastNeuter: "ходило", pastPlural: "ходили",
+            present: ["ya": "хожу", "ty": "ходишь", "on": "ходит", "my": "ходим", "vy": "ходите", "oni": "ходят"],
+            imperativeInformal: "ходи", imperativeFormal: "ходите")),
+
+    Word(id: 172, russian: "водить", transliteration: "vadIt", translation: "to drive / lead (general)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я умею водить машину.", exampleTranslation: "I know how to drive a car.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повести",
+            pastMasculine: "водил", pastFeminine: "водила", pastNeuter: "водило", pastPlural: "водили",
+            present: ["ya": "вожу", "ty": "водишь", "on": "водит", "my": "водим", "vy": "водите", "oni": "водят"],
+            imperativeInformal: "води", imperativeFormal: "водите")),
+
+    Word(id: 173, russian: "вести", transliteration: "vestI", translation: "to lead (one direction)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Она ведёт урок.", exampleTranslation: "She is leading the lesson.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повести",
+            pastMasculine: "вёл", pastFeminine: "вела", pastNeuter: "вело", pastPlural: "вели",
+            present: ["ya": "веду", "ty": "ведёшь", "on": "ведёт", "my": "ведём", "vy": "ведёте", "oni": "ведут"],
+            imperativeInformal: "веди", imperativeFormal: "ведите")),
+
+    Word(id: 174, russian: "возить", transliteration: "vazIt", translation: "to transport (general)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Он возит детей в школу.", exampleTranslation: "He drives the kids to school.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повезти",
+            pastMasculine: "возил", pastFeminine: "возила", pastNeuter: "возило", pastPlural: "возили",
+            present: ["ya": "вожу", "ty": "возишь", "on": "возит", "my": "возим", "vy": "возите", "oni": "возят"],
+            imperativeInformal: "вози", imperativeFormal: "возите")),
+
+    Word(id: 175, russian: "везти", transliteration: "vezti", translation: "to transport (one direction)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Такси везёт нас в аэропорт.", exampleTranslation: "The taxi is taking us to the airport.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повезти",
+            pastMasculine: "вёз", pastFeminine: "везла", pastNeuter: "везло", pastPlural: "везли",
+            present: ["ya": "везу", "ty": "везёшь", "on": "везёт", "my": "везём", "vy": "везёте", "oni": "везут"],
+            imperativeInformal: "вези", imperativeFormal: "везите")),
+
+    Word(id: 176, russian: "носить", transliteration: "nasIt", translation: "to carry / wear (general)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Она носит очки.", exampleTranslation: "She wears glasses.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "понести",
+            pastMasculine: "носил", pastFeminine: "носила", pastNeuter: "носило", pastPlural: "носили",
+            present: ["ya": "ношу", "ty": "носишь", "on": "носит", "my": "носим", "vy": "носите", "oni": "носят"],
+            imperativeInformal: "носи", imperativeFormal: "носите")),
+
+    Word(id: 177, russian: "нести", transliteration: "nyestI", translation: "to carry (one direction)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я несу сумку.", exampleTranslation: "I'm carrying the bag.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "понести",
+            pastMasculine: "нёс", pastFeminine: "несла", pastNeuter: "несло", pastPlural: "несли",
+            present: ["ya": "несу", "ty": "несёшь", "on": "несёт", "my": "несём", "vy": "несёте", "oni": "несут"],
+            imperativeInformal: "неси", imperativeFormal: "несите")),
+
+    Word(id: 178, russian: "кричать", transliteration: "krichAt", translation: "to shout",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Не кричи на меня.", exampleTranslation: "Don't shout at me.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "закричать",
+            pastMasculine: "кричал", pastFeminine: "кричала", pastNeuter: "кричало", pastPlural: "кричали",
+            present: ["ya": "кричу", "ty": "кричишь", "on": "кричит", "my": "кричим", "vy": "кричите", "oni": "кричат"],
+            imperativeInformal: "кричи", imperativeFormal: "кричите")),
+
+    Word(id: 179, russian: "плакать", transliteration: "plAkat", translation: "to cry",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Ребёнок плачет.", exampleTranslation: "The child is crying.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "заплакать",
+            pastMasculine: "плакал", pastFeminine: "плакала", pastNeuter: "плакало", pastPlural: "плакали",
+            present: ["ya": "плачу", "ty": "плачешь", "on": "плачет", "my": "плачем", "vy": "плачете", "oni": "плачут"],
+            imperativeInformal: "плачь", imperativeFormal: "плачьте")),
+
+    Word(id: 180, russian: "смеяться", transliteration: "smeyAtsa", translation: "to laugh",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Мы много смеялись.", exampleTranslation: "We laughed a lot.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "засмеяться",
+            pastMasculine: "смеялся", pastFeminine: "смеялась", pastNeuter: "смеялось", pastPlural: "смеялись",
+            present: ["ya": "смеюсь", "ty": "смеёшься", "on": "смеётся", "my": "смеёмся", "vy": "смеётесь", "oni": "смеются"],
+            imperativeInformal: "смейся", imperativeFormal: "смейтесь")),
+
+    Word(id: 181, russian: "улыбаться", transliteration: "ulybAtsa", translation: "to smile",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Она всегда улыбается.", exampleTranslation: "She always smiles.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "улыбнуться",
+            pastMasculine: "улыбался", pastFeminine: "улыбалась", pastNeuter: "улыбалось", pastPlural: "улыбались",
+            present: ["ya": "улыбаюсь", "ty": "улыбаешься", "on": "улыбается", "my": "улыбаемся", "vy": "улыбаетесь", "oni": "улыбаются"],
+            imperativeInformal: "улыбайся", imperativeFormal: "улыбайтесь")),
+
+    Word(id: 182, russian: "целовать", transliteration: "tselavAt", translation: "to kiss",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Он целует её.", exampleTranslation: "He kisses her.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поцеловать",
+            pastMasculine: "целовал", pastFeminine: "целовала", pastNeuter: "целовало", pastPlural: "целовали",
+            present: ["ya": "целую", "ty": "целуешь", "on": "целует", "my": "целуем", "vy": "целуете", "oni": "целуют"],
+            imperativeInformal: "целуй", imperativeFormal: "целуйте")),
+
+    Word(id: 183, russian: "обнимать", transliteration: "abnimAt", translation: "to hug",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Она обнимает друга.", exampleTranslation: "She hugs her friend.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "обнять",
+            pastMasculine: "обнимал", pastFeminine: "обнимала", pastNeuter: "обнимало", pastPlural: "обнимали",
+            present: ["ya": "обнимаю", "ty": "обнимаешь", "on": "обнимает", "my": "обнимаем", "vy": "обнимаете", "oni": "обнимают"],
+            imperativeInformal: "обнимай", imperativeFormal: "обнимайте")),
+
+    Word(id: 184, russian: "отдыхать", transliteration: "addykhAt", translation: "to rest",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я отдыхаю по выходным.", exampleTranslation: "I rest on weekends.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "отдохнуть",
+            pastMasculine: "отдыхал", pastFeminine: "отдыхала", pastNeuter: "отдыхало", pastPlural: "отдыхали",
+            present: ["ya": "отдыхаю", "ty": "отдыхаешь", "on": "отдыхает", "my": "отдыхаем", "vy": "отдыхаете", "oni": "отдыхают"],
+            imperativeInformal: "отдыхай", imperativeFormal: "отдыхайте")),
+
+    Word(id: 185, russian: "отдохнуть", transliteration: "addakhnUt", translation: "to rest (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 6,
+         exampleRussian: "Мне нужно отдохнуть.", exampleTranslation: "I need to rest.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "отдыхать",
+            pastMasculine: "отдохнул", pastFeminine: "отдохнула", pastNeuter: "отдохнуло", pastPlural: "отдохнули",
+            present: ["ya": "отдохну", "ty": "отдохнёшь", "on": "отдохнёт", "my": "отдохнём", "vy": "отдохнёте", "oni": "отдохнут"],
+            imperativeInformal: "отдохни", imperativeFormal: "отдохните")),
+
+    Word(id: 186, russian: "болеть", transliteration: "balYEt", translation: "to be sick / hurt",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "У меня болит голова.", exampleTranslation: "My head hurts.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "заболеть",
+            pastMasculine: "болел", pastFeminine: "болела", pastNeuter: "болело", pastPlural: "болели",
+            present: ["ya": "болею", "ty": "болеешь", "on": "болеет", "my": "болеем", "vy": "болеете", "oni": "болеют"],
+            imperativeInformal: nil, imperativeFormal: nil)),
+
+    Word(id: 187, russian: "лечить", transliteration: "lyechIt", translation: "to treat / cure",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Врач лечит пациентов.", exampleTranslation: "The doctor treats patients.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "вылечить",
+            pastMasculine: "лечил", pastFeminine: "лечила", pastNeuter: "лечило", pastPlural: "лечили",
+            present: ["ya": "лечу", "ty": "лечишь", "on": "лечит", "my": "лечим", "vy": "лечите", "oni": "лечат"],
+            imperativeInformal: "лечи", imperativeFormal: "лечите")),
+
+    Word(id: 188, russian: "лечиться", transliteration: "lyechItsa", translation: "to be treated (medically)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Он лечится от простуды.", exampleTranslation: "He's being treated for a cold.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "вылечиться",
+            pastMasculine: "лечился", pastFeminine: "лечилась", pastNeuter: "лечилось", pastPlural: "лечились",
+            present: ["ya": "лечусь", "ty": "лечишься", "on": "лечится", "my": "лечимся", "vy": "лечитесь", "oni": "лечатся"],
+            imperativeInformal: "лечись", imperativeFormal: "лечитесь")),
+
+    Word(id: 189, russian: "падать", transliteration: "pAdat", translation: "to fall",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Листья падают осенью.", exampleTranslation: "Leaves fall in autumn.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "упасть",
+            pastMasculine: "падал", pastFeminine: "падала", pastNeuter: "падало", pastPlural: "падали",
+            present: ["ya": "падаю", "ty": "падаешь", "on": "падает", "my": "падаем", "vy": "падаете", "oni": "падают"],
+            imperativeInformal: "падай", imperativeFormal: "падайте")),
+
+    Word(id: 190, russian: "упасть", transliteration: "upAst", translation: "to fall (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Он упал на улице.", exampleTranslation: "He fell on the street.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "падать",
+            pastMasculine: "упал", pastFeminine: "упала", pastNeuter: "упало", pastPlural: "упали",
+            present: ["ya": "упаду", "ty": "упадёшь", "on": "упадёт", "my": "упадём", "vy": "упадёте", "oni": "упадут"],
+            imperativeInformal: "упади", imperativeFormal: "упадите")),
+
+    Word(id: 191, russian: "бросать", transliteration: "brasAt", translation: "to throw / quit",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Он бросает мяч.", exampleTranslation: "He throws the ball.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "бросить",
+            pastMasculine: "бросал", pastFeminine: "бросала", pastNeuter: "бросало", pastPlural: "бросали",
+            present: ["ya": "бросаю", "ty": "бросаешь", "on": "бросает", "my": "бросаем", "vy": "бросаете", "oni": "бросают"],
+            imperativeInformal: "бросай", imperativeFormal: "бросайте")),
+
+    Word(id: 192, russian: "бросить", transliteration: "brOsit", translation: "to throw / quit (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Я бросил курить.", exampleTranslation: "I quit smoking.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "бросать",
+            pastMasculine: "бросил", pastFeminine: "бросила", pastNeuter: "бросило", pastPlural: "бросили",
+            present: ["ya": "брошу", "ty": "бросишь", "on": "бросит", "my": "бросим", "vy": "бросите", "oni": "бросят"],
+            imperativeInformal: "брось", imperativeFormal: "бросьте")),
+
+    Word(id: 193, russian: "ловить", transliteration: "lavIt", translation: "to catch",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Кот ловит мышь.", exampleTranslation: "The cat is catching a mouse.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поймать",
+            pastMasculine: "ловил", pastFeminine: "ловила", pastNeuter: "ловило", pastPlural: "ловили",
+            present: ["ya": "ловлю", "ty": "ловишь", "on": "ловит", "my": "ловим", "vy": "ловите", "oni": "ловят"],
+            imperativeInformal: "лови", imperativeFormal: "ловите")),
+
+    Word(id: 194, russian: "поймать", transliteration: "paymAt", translation: "to catch (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я поймал такси.", exampleTranslation: "I caught a taxi.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "ловить",
+            pastMasculine: "поймал", pastFeminine: "поймала", pastNeuter: "поймало", pastPlural: "поймали",
+            present: ["ya": "поймаю", "ty": "поймаешь", "on": "поймает", "my": "поймаем", "vy": "поймаете", "oni": "поймают"],
+            imperativeInformal: "поймай", imperativeFormal: "поймайте")),
+
+    Word(id: 195, russian: "держать", transliteration: "dyerzhAt", translation: "to hold",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Держи меня за руку.", exampleTranslation: "Hold my hand.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "подержать",
+            pastMasculine: "держал", pastFeminine: "держала", pastNeuter: "держало", pastPlural: "держали",
+            present: ["ya": "держу", "ty": "держишь", "on": "держит", "my": "держим", "vy": "держите", "oni": "держат"],
+            imperativeInformal: "держи", imperativeFormal: "держите")),
+
+    Word(id: 196, russian: "класть", transliteration: "klast", translation: "to put / lay down",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Я кладу книгу на стол.", exampleTranslation: "I'm putting the book on the table.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "положить",
+            pastMasculine: "клал", pastFeminine: "клала", pastNeuter: "клало", pastPlural: "клали",
+            present: ["ya": "кладу", "ty": "кладёшь", "on": "кладёт", "my": "кладём", "vy": "кладёте", "oni": "кладут"],
+            imperativeInformal: "клади", imperativeFormal: "кладите")),
+
+    Word(id: 197, russian: "положить", transliteration: "palazhIt", translation: "to put / lay down (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Положи телефон сюда.", exampleTranslation: "Put the phone here.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "класть",
+            pastMasculine: "положил", pastFeminine: "положила", pastNeuter: "положило", pastPlural: "положили",
+            present: ["ya": "положу", "ty": "положишь", "on": "положит", "my": "положим", "vy": "положите", "oni": "положат"],
+            imperativeInformal: "положи", imperativeFormal: "положите")),
+
+    Word(id: 198, russian: "ставить", transliteration: "stAvit", translation: "to put / stand something",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Я ставлю чашку на стол.", exampleTranslation: "I'm putting the cup on the table.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поставить",
+            pastMasculine: "ставил", pastFeminine: "ставила", pastNeuter: "ставило", pastPlural: "ставили",
+            present: ["ya": "ставлю", "ty": "ставишь", "on": "ставит", "my": "ставим", "vy": "ставите", "oni": "ставят"],
+            imperativeInformal: "ставь", imperativeFormal: "ставьте")),
+
+    Word(id: 199, russian: "поставить", transliteration: "pastAvit", translation: "to put / stand something (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Поставь сумку здесь.", exampleTranslation: "Put the bag here.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "ставить",
+            pastMasculine: "поставил", pastFeminine: "поставила", pastNeuter: "поставило", pastPlural: "поставили",
+            present: ["ya": "поставлю", "ty": "поставишь", "on": "поставит", "my": "поставим", "vy": "поставите", "oni": "поставят"],
+            imperativeInformal: "поставь", imperativeFormal: "поставьте")),
+
+    Word(id: 200, russian: "висеть", transliteration: "visYEt", translation: "to hang (be hanging)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Картина висит на стене.", exampleTranslation: "The painting is hanging on the wall.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "висел", pastFeminine: "висела", pastNeuter: "висело", pastPlural: "висели",
+            present: ["ya": "вишу", "ty": "висишь", "on": "висит", "my": "висим", "vy": "висите", "oni": "висят"],
+            imperativeInformal: "виси", imperativeFormal: "висите")),
+
+    Word(id: 201, russian: "вешать", transliteration: "vYEshat", translation: "to hang (something)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я вешаю пальто.", exampleTranslation: "I'm hanging up my coat.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "повесить",
+            pastMasculine: "вешал", pastFeminine: "вешала", pastNeuter: "вешало", pastPlural: "вешали",
+            present: ["ya": "вешаю", "ty": "вешаешь", "on": "вешает", "my": "вешаем", "vy": "вешаете", "oni": "вешают"],
+            imperativeInformal: "вешай", imperativeFormal: "вешайте")),
+
+    Word(id: 202, russian: "повесить", transliteration: "pavYEsit", translation: "to hang (something, once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Повесь картину здесь.", exampleTranslation: "Hang the painting here.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "вешать",
+            pastMasculine: "повесил", pastFeminine: "повесила", pastNeuter: "повесило", pastPlural: "повесили",
+            present: ["ya": "повешу", "ty": "повесишь", "on": "повесит", "my": "повесим", "vy": "повесите", "oni": "повесят"],
+            imperativeInformal: "повесь", imperativeFormal: "повесьте")),
+
+    Word(id: 203, russian: "строить", transliteration: "strOit", translation: "to build",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Они строят новый дом.", exampleTranslation: "They're building a new house.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "построить",
+            pastMasculine: "строил", pastFeminine: "строила", pastNeuter: "строило", pastPlural: "строили",
+            present: ["ya": "строю", "ty": "строишь", "on": "строит", "my": "строим", "vy": "строите", "oni": "строят"],
+            imperativeInformal: "строй", imperativeFormal: "стройте")),
+
+    Word(id: 204, russian: "построить", transliteration: "pastrOit", translation: "to build (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Мы построили дом.", exampleTranslation: "We built a house.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "строить",
+            pastMasculine: "построил", pastFeminine: "построила", pastNeuter: "построило", pastPlural: "построили",
+            present: ["ya": "построю", "ty": "построишь", "on": "построит", "my": "построим", "vy": "построите", "oni": "построят"],
+            imperativeInformal: "построй", imperativeFormal: "постройте")),
+
+    Word(id: 205, russian: "ломать", transliteration: "lamAt", translation: "to break",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Не ломай игрушки.", exampleTranslation: "Don't break the toys.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "сломать",
+            pastMasculine: "ломал", pastFeminine: "ломала", pastNeuter: "ломало", pastPlural: "ломали",
+            present: ["ya": "ломаю", "ty": "ломаешь", "on": "ломает", "my": "ломаем", "vy": "ломаете", "oni": "ломают"],
+            imperativeInformal: "ломай", imperativeFormal: "ломайте")),
+
+    Word(id: 206, russian: "сломать", transliteration: "slamAt", translation: "to break (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я сломал телефон.", exampleTranslation: "I broke my phone.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "ломать",
+            pastMasculine: "сломал", pastFeminine: "сломала", pastNeuter: "сломало", pastPlural: "сломали",
+            present: ["ya": "сломаю", "ty": "сломаешь", "on": "сломает", "my": "сломаем", "vy": "сломаете", "oni": "сломают"],
+            imperativeInformal: "сломай", imperativeFormal: "сломайте")),
+
+    Word(id: 207, russian: "чинить", transliteration: "chinIt", translation: "to fix / repair",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Он чинит машину.", exampleTranslation: "He's fixing the car.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "починить",
+            pastMasculine: "чинил", pastFeminine: "чинила", pastNeuter: "чинило", pastPlural: "чинили",
+            present: ["ya": "чиню", "ty": "чинишь", "on": "чинит", "my": "чиним", "vy": "чините", "oni": "чинят"],
+            imperativeInformal: "чини", imperativeFormal: "чините")),
+
+    Word(id: 208, russian: "починить", transliteration: "pachinIt", translation: "to fix / repair (once)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 5,
+         exampleRussian: "Я починил велосипед.", exampleTranslation: "I fixed the bicycle.",
+         verbDetails: VerbDetails(aspect: "perfective", aspectPair: "чинить",
+            pastMasculine: "починил", pastFeminine: "починила", pastNeuter: "починило", pastPlural: "починили",
+            present: ["ya": "починю", "ty": "починишь", "on": "починит", "my": "починим", "vy": "почините", "oni": "починят"],
+            imperativeInformal: "почини", imperativeFormal: "почините")),
+
+    Word(id: 209, russian: "рвать", transliteration: "rvat", translation: "to tear",
+         partOfSpeech: "verb", gender: nil, stressIndex: 2,
+         exampleRussian: "Не рви бумагу.", exampleTranslation: "Don't tear the paper.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "порвать",
+            pastMasculine: "рвал", pastFeminine: "рвала", pastNeuter: "рвало", pastPlural: "рвали",
+            present: ["ya": "рву", "ty": "рвёшь", "on": "рвёт", "my": "рвём", "vy": "рвёте", "oni": "рвут"],
+            imperativeInformal: "рви", imperativeFormal: "рвите")),
+
+    Word(id: 210, russian: "резать", transliteration: "rYEzat", translation: "to cut",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Я режу хлеб.", exampleTranslation: "I'm cutting bread.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "порезать",
+            pastMasculine: "резал", pastFeminine: "резала", pastNeuter: "резало", pastPlural: "резали",
+            present: ["ya": "режу", "ty": "режешь", "on": "режет", "my": "режем", "vy": "режете", "oni": "режут"],
+            imperativeInformal: "режь", imperativeFormal: "режьте")),
+
+    Word(id: 211, russian: "варить", transliteration: "varIt", translation: "to boil / cook",
+         partOfSpeech: "verb", gender: nil, stressIndex: 3,
+         exampleRussian: "Я варю суп.", exampleTranslation: "I'm cooking soup.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "сварить",
+            pastMasculine: "варил", pastFeminine: "варила", pastNeuter: "варило", pastPlural: "варили",
+            present: ["ya": "варю", "ty": "варишь", "on": "варит", "my": "варим", "vy": "варите", "oni": "варят"],
+            imperativeInformal: "вари", imperativeFormal: "варите")),
+
+    Word(id: 212, russian: "жарить", transliteration: "zhArit", translation: "to fry",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Мама жарит рыбу.", exampleTranslation: "Mom is frying fish.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "поджарить",
+            pastMasculine: "жарил", pastFeminine: "жарила", pastNeuter: "жарило", pastPlural: "жарили",
+            present: ["ya": "жарю", "ty": "жаришь", "on": "жарит", "my": "жарим", "vy": "жарите", "oni": "жарят"],
+            imperativeInformal: "жарь", imperativeFormal: "жарьте")),
+
+    Word(id: 213, russian: "печь", transliteration: "pyech", translation: "to bake",
+         partOfSpeech: "verb", gender: nil, stressIndex: 1,
+         exampleRussian: "Бабушка печёт пирог.", exampleTranslation: "Grandma is baking a pie.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: "испечь",
+            pastMasculine: "пёк", pastFeminine: "пекла", pastNeuter: "пекло", pastPlural: "пекли",
+            present: ["ya": "пеку", "ty": "печёшь", "on": "печёт", "my": "печём", "vy": "печёте", "oni": "пекут"],
+            imperativeInformal: "пеки", imperativeFormal: "пеките")),
+
+    Word(id: 214, russian: "мечтать", transliteration: "mechtAt", translation: "to dream (aspire)",
+         partOfSpeech: "verb", gender: nil, stressIndex: 4,
+         exampleRussian: "Я мечтаю о путешествии.", exampleTranslation: "I dream about traveling.",
+         verbDetails: VerbDetails(aspect: "imperfective", aspectPair: nil,
+            pastMasculine: "мечтал", pastFeminine: "мечтала", pastNeuter: "мечтало", pastPlural: "мечтали",
+            present: ["ya": "мечтаю", "ty": "мечтаешь", "on": "мечтает", "my": "мечтаем", "vy": "мечтаете", "oni": "мечтают"],
+            imperativeInformal: "мечтай", imperativeFormal: "мечтайте")),
 ]
+
+// Returns the Russian word with a combining acute accent (´) placed over
+// the stressed vowel, e.g. "спасибо" -> "спаси́бо". This is the standard
+// mark used in Russian dictionaries and textbooks to show stress.
+func stressedRussian(_ word: Word) -> String {
+    let chars = Array(word.russian)
+    guard word.stressIndex >= 0, word.stressIndex < chars.count else { return word.russian }
+    var result = ""
+    for (i, ch) in chars.enumerated() {
+        result.append(ch)
+        if i == word.stressIndex {
+            result.append("\u{0301}") // combining acute accent
+        }
+    }
+    return result
+}
 
 // Picks a word based on how many days since a fixed start date,
 // so the "word of the day" changes automatically every day.
@@ -747,4 +1764,3 @@ func wordOfTheDay(from list: [Word], startDate: Date = Date(timeIntervalSince197
     let index = daysSinceStart % list.count
     return list[index]
 }
-
