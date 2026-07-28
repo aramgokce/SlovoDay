@@ -1,11 +1,39 @@
+
 import SwiftUI
 
 struct ContentView: View {
     @StateObject private var store = LearningStore()
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 24) {
+
+                // Category filter chips
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        CategoryChip(
+                            label: "All",
+                            learned: store.learnedCount(for: nil),
+                            total: store.totalCount(for: nil),
+                            isSelected: store.selectedCategory == nil
+                        ) {
+                            store.setCategory(nil)
+                        }
+                        ForEach(wordCategories, id: \.self) { category in
+                            CategoryChip(
+                                label: category.capitalized,
+                                learned: store.learnedCount(for: category),
+                                total: store.totalCount(for: category),
+                                isSelected: store.selectedCategory == category
+                            ) {
+                                store.setCategory(category)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .padding(.top, 16)
 
                 VStack(spacing: 6) {
                     HStack {
@@ -27,7 +55,6 @@ struct ContentView: View {
                     ProgressView(value: Double(store.learnedCount), total: Double(max(store.totalCount, 1)))
                         .padding(.horizontal, 40)
                 }
-                .padding(.top, 40)
 
                 if let word = store.currentWord {
 
@@ -134,10 +161,51 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("SlovoDay")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                    }
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView(store: store)
+            }
         }
     }
 }
 
 #Preview {
     ContentView()
+}
+
+// A single pill-shaped filter chip used in the category bar, showing that
+// category's own learned/total progress.
+struct CategoryChip: View {
+    let label: String
+    let learned: Int
+    let total: Int
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 2) {
+                Text(label)
+                    .font(.subheadline)
+                    .fontWeight(isSelected ? .semibold : .regular)
+                Text("\(learned)/\(total)")
+                    .font(.caption2)
+                    .opacity(0.8)
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background(isSelected ? Color.accentColor : Color.gray.opacity(0.15))
+            .foregroundColor(isSelected ? .white : .primary)
+            .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
 }

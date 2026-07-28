@@ -2617,3 +2617,15 @@ func wordOfTheDay(from list: [Word], startDate: Date = Date(timeIntervalSince197
     return list[index]
 }
 
+// MARK: - Available Categories
+let wordCategories = [
+    "verb",
+    "noun",
+    "pronoun",
+    "adjective",
+    "adverb",
+    "particle",
+    "interjection"
+].filter { category in
+    wordList.contains { $0.partOfSpeech == category }
+}
